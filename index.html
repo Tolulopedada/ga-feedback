@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GREATER AGILE | Month 1 Feedback</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --orange: #F7931E; --black: #2E2E2E; --grey-bg: #F0EFEA;
+      --yellow: #FFB400; --white: #FFFFFF; --muted: #8A8A8A;
+      --border: #E2E2DF; --radius: 14px; --radius-sm: 8px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--grey-bg); color: var(--black); min-height: 100vh; padding: 0 0 6rem; }
+
+    .hero { background: var(--black); padding: 3.5rem 2rem 3rem; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: -60px; right: -60px; width: 260px; height: 260px; border-radius: 50%; background: var(--orange); opacity: 0.12; }
+    .hero::after { content: ''; position: absolute; bottom: -50px; left: -30px; width: 180px; height: 180px; border-radius: 50%; background: var(--yellow); opacity: 0.08; }
+    .hero-inner { max-width: 680px; margin: 0 auto; position: relative; z-index: 1; }
+    .brand-tag { display: inline-flex; align-items: center; gap: 8px; background: rgba(247,147,30,0.15); border: 1px solid rgba(247,147,30,0.3); border-radius: 99px; padding: 5px 14px; font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.14em; color: var(--orange); text-transform: uppercase; margin-bottom: 1.25rem; }
+    .brand-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--orange); }
+    .hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(28px, 5vw, 40px); font-weight: 800; color: var(--white); line-height: 1.15; margin-bottom: 1rem; letter-spacing: -0.02em; }
+    .hero h1 em { color: var(--orange); font-style: normal; }
+    .hero p { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.7; max-width: 480px; margin-bottom: 1.75rem; }
+    .progress-wrap { background: rgba(255,255,255,0.08); border-radius: 99px; height: 5px; overflow: hidden; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--orange), var(--yellow)); border-radius: 99px; width: 0%; transition: width 0.45s cubic-bezier(0.4,0,0.2,1); }
+    .progress-meta { display: flex; justify-content: space-between; margin-top: 0.5rem; font-size: 11px; color: rgba(255,255,255,0.3); font-family: 'Syne', sans-serif; letter-spacing: 0.06em; }
+
+    .form-body { max-width: 680px; margin: 0 auto; padding: 2rem 1rem 0; }
+    .section-card { background: var(--white); border-radius: var(--radius); border: 1px solid var(--border); padding: 1.75rem 1.75rem 1.5rem; margin-bottom: 1rem; animation: fadeUp 0.4s ease both; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    .section-card:nth-child(2){animation-delay:0.05s} .section-card:nth-child(3){animation-delay:0.1s} .section-card:nth-child(4){animation-delay:0.15s} .section-card:nth-child(5){animation-delay:0.2s} .section-card:nth-child(6){animation-delay:0.25s}
+    .section-heading { display: flex; align-items: center; gap: 10px; margin-bottom: 1.5rem; }
+    .section-icon { width: 30px; height: 30px; border-radius: var(--radius-sm); background: #FFF2E2; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+    .section-title { font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; color: var(--orange); text-transform: uppercase; }
+    .question { margin-bottom: 1.5rem; }
+    .question:last-child { margin-bottom: 0; }
+    .q-label { font-size: 14px; font-weight: 500; color: var(--black); margin-bottom: 0.35rem; line-height: 1.5; }
+    .q-label .req { color: var(--orange); margin-left: 2px; }
+    .q-hint { font-size: 12px; color: var(--muted); margin-bottom: 0.6rem; }
+
+    .star-row { display: flex; gap: 5px; }
+    .star-btn { width: 40px; height: 40px; border-radius: var(--radius-sm); border: 1.5px solid var(--border); background: var(--white); cursor: pointer; font-size: 20px; color: #D4D4D0; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
+    .star-btn:hover { border-color: var(--orange); background: #FFF7EE; color: var(--orange); transform: scale(1.08); }
+    .star-btn.lit { color: var(--orange); background: #FFF7EE; border-color: rgba(247,147,30,0.4); }
+
+    .scale-row { display: flex; gap: 5px; flex-wrap: wrap; }
+    .scale-btn { width: 44px; height: 44px; border-radius: var(--radius-sm); border: 1.5px solid var(--border); background: var(--white); cursor: pointer; font-size: 14px; font-weight: 600; color: var(--muted); transition: all 0.15s; font-family: 'DM Sans', sans-serif; }
+    .scale-btn:hover { border-color: var(--orange); color: var(--orange); background: #FFF7EE; }
+    .scale-btn.active { background: var(--orange); border-color: var(--orange); color: var(--white); transform: scale(1.06); }
+
+    .nps-row { display: flex; gap: 4px; flex-wrap: wrap; }
+    .nps-btn { width: 42px; height: 42px; border-radius: var(--radius-sm); border: 1.5px solid var(--border); background: var(--white); cursor: pointer; font-size: 13px; font-weight: 600; color: var(--muted); transition: all 0.15s; font-family: 'DM Sans', sans-serif; }
+    .nps-btn:hover { border-color: var(--orange); color: var(--orange); }
+    .nps-btn.active { background: var(--orange); border-color: var(--orange); color: var(--white); }
+    .nps-labels { display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); margin-top: 6px; }
+
+    .choice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .choice-btn { padding: 10px 13px; border-radius: var(--radius-sm); border: 1.5px solid var(--border); background: var(--white); cursor: pointer; font-size: 13px; color: var(--black); text-align: left; transition: all 0.15s; font-family: 'DM Sans', sans-serif; line-height: 1.4; font-weight: 400; }
+    .choice-btn:hover { border-color: var(--orange); background: #FFF7EE; }
+    .choice-btn.active { border-color: var(--orange); background: #FFF7EE; font-weight: 500; }
+
+    textarea, input[type="text"], input[type="email"] { width: 100%; border: 1.5px solid var(--border); border-radius: var(--radius-sm); padding: 12px 14px; font-size: 13px; font-family: 'DM Sans', sans-serif; color: var(--black); background: var(--white); resize: vertical; transition: border-color 0.15s, box-shadow 0.15s; outline: none; line-height: 1.6; }
+    textarea { min-height: 90px; }
+    textarea:focus, input:focus { border-color: var(--orange); box-shadow: 0 0 0 3px rgba(247,147,30,0.1); }
+    textarea::placeholder, input::placeholder { color: #BDBDB9; }
+    .name-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .q-divider { border: none; border-top: 1px solid var(--border); margin: 1.25rem 0; }
+
+    .submit-block { background: var(--black); border-radius: var(--radius); padding: 2.25rem 2rem; text-align: center; margin-top: 1rem; position: relative; overflow: hidden; }
+    .submit-block::before { content: ''; position: absolute; top: -40px; right: -40px; width: 160px; height: 160px; border-radius: 50%; background: var(--orange); opacity: 0.08; }
+    .submit-btn { position: relative; z-index: 1; background: var(--orange); color: var(--white); border: none; border-radius: 10px; padding: 15px 48px; font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; cursor: pointer; letter-spacing: 0.04em; transition: all 0.2s; display: inline-block; }
+    .submit-btn:hover { background: #E07D0A; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(247,147,30,0.35); }
+    .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
+    .submit-note { font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 0.75rem; position: relative; z-index: 1; }
+
+    .spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.4); border-top-color: white; border-radius: 50%; animation: spin 0.7s linear infinite; vertical-align: middle; margin-right: 8px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .thankyou-block { display: none; background: var(--black); border-radius: var(--radius); padding: 3.5rem 2rem; text-align: center; margin-top: 1rem; animation: fadeUp 0.5s ease; }
+    .tick-circle { width: 70px; height: 70px; border-radius: 50%; background: var(--orange); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 30px; color: white; animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.1s both; }
+    @keyframes popIn { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    .thankyou-block h2 { font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 800; color: var(--white); margin-bottom: 0.75rem; }
+    .thankyou-block p { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.7; max-width: 380px; margin: 0 auto 1.5rem; }
+    .thankyou-brand { font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.12em; color: rgba(247,147,30,0.7); text-transform: uppercase; }
+
+    @media (max-width: 480px) { .choice-grid { grid-template-columns: 1fr; } .name-row { grid-template-columns: 1fr; } .hero { padding: 2.5rem 1.25rem 2rem; } }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="brand-tag">Greater Agile &nbsp;/&nbsp; ROCKITECH CIC</div>
+      <h1>Month 1<br /><em>Feedback Form</em></h1>
+      <p>You have completed the foundation phase of your journey. Your honest feedback shapes how we deliver Month 2 and every cohort that follows. This takes less than five minutes.</p>
+      <div class="progress-wrap"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="progress-meta"><span id="progressLabel">Not started</span><span id="progressPct">0%</span></div>
+    </div>
+  </div>
+
+  <div class="form-body">
+    <form id="feedbackForm" novalidate>
+
+      <div class="section-card">
+        <div class="section-heading"><div class="section-icon">👤</div><div class="section-title">About You</div></div>
+        <div class="question">
+          <div class="q-label">Your name <span class="req">*</span></div>
+          <div class="name-row">
+            <input type="text" id="firstName" placeholder="First name" oninput="updateProgress()" />
+            <input type="text" id="lastName" placeholder="Last name" oninput="updateProgress()" />
+          </div>
+        </div>
+        <div class="question">
+          <div class="q-label">Your email address <span class="req">*</span></div>
+          <input type="email" id="email" placeholder="you@email.com" oninput="updateProgress()" />
+        </div>
+        <div class="question">
+          <div class="q-label">Which role are you targeting?</div>
+          <div class="choice-grid" id="roleTarget">
+            <button type="button" class="choice-btn" onclick="setChoice('roleTarget',this)">Scrum Master</button>
+            <button type="button" class="choice-btn" onclick="setChoice('roleTarget',this)">Delivery Manager</button>
+            <button type="button" class="choice-btn" onclick="setChoice('roleTarget',this)">Both</button>
+            <button type="button" class="choice-btn" onclick="setChoice('roleTarget',this)">Still deciding</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-heading"><div class="section-icon">⭐</div><div class="section-title">Overall Experience</div></div>
+        <div class="question">
+          <div class="q-label">How would you rate your overall experience of Month 1? <span class="req">*</span></div>
+          <div class="star-row" id="overallStar">
+            <button type="button" class="star-btn" onclick="setStars(1)">★</button>
+            <button type="button" class="star-btn" onclick="setStars(2)">★</button>
+            <button type="button" class="star-btn" onclick="setStars(3)">★</button>
+            <button type="button" class="star-btn" onclick="setStars(4)">★</button>
+            <button type="button" class="star-btn" onclick="setStars(5)">★</button>
+          </div>
+        </div>
+        <hr class="q-divider" />
+        <div class="question">
+          <div class="q-label">How confident do you feel about Agile and Scrum after Month 1? <span class="req">*</span></div>
+          <div class="q-hint">1 = Not confident at all &nbsp; 5 = Very confident</div>
+          <div class="scale-row" id="conf">
+            <button type="button" class="scale-btn" onclick="setScale('conf',1)">1</button><button type="button" class="scale-btn" onclick="setScale('conf',2)">2</button><button type="button" class="scale-btn" onclick="setScale('conf',3)">3</button><button type="button" class="scale-btn" onclick="setScale('conf',4)">4</button><button type="button" class="scale-btn" onclick="setScale('conf',5)">5</button>
+          </div>
+        </div>
+        <hr class="q-divider" />
+        <div class="question">
+          <div class="q-label">How well did the sessions match your expectations? <span class="req">*</span></div>
+          <div class="q-hint">1 = Not at all &nbsp; 5 = Exactly what I expected</div>
+          <div class="scale-row" id="expect">
+            <button type="button" class="scale-btn" onclick="setScale('expect',1)">1</button><button type="button" class="scale-btn" onclick="setScale('expect',2)">2</button><button type="button" class="scale-btn" onclick="setScale('expect',3)">3</button><button type="button" class="scale-btn" onclick="setScale('expect',4)">4</button><button type="button" class="scale-btn" onclick="setScale('expect',5)">5</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-heading"><div class="section-icon">📚</div><div class="section-title">Content and Learning</div></div>
+        <div class="question">
+          <div class="q-label">Which topic did you find most valuable? <span class="req">*</span></div>
+          <div class="choice-grid" id="topicVal">
+            <button type="button" class="choice-btn" onclick="setChoice('topicVal',this)">Agile Principles and Mindset</button>
+            <button type="button" class="choice-btn" onclick="setChoice('topicVal',this)">Introduction to Scrum</button>
+            <button type="button" class="choice-btn" onclick="setChoice('topicVal',this)">Scrum Roles in Depth</button>
+            <button type="button" class="choice-btn" onclick="setChoice('topicVal',this)">Ceremonies and Artefacts</button>
+            <button type="button" class="choice-btn" onclick="setChoice('topicVal',this)">Delivery Manager Role</button>
+            <button type="button" class="choice-btn" onclick="setChoice('topicVal',this)">SM vs Delivery Manager</button>
+            <button type="button" class="choice-btn" onclick="setChoice('topicVal',this)">Stakeholder Management</button>
+            <button type="button" class="choice-btn" onclick="setChoice('topicVal',this)">Facilitation and Tooling</button>
+          </div>
+        </div>
+        <hr class="q-divider" />
+        <div class="question">
+          <div class="q-label">Which topic do you need more support with?</div>
+          <div class="choice-grid" id="topicHelp">
+            <button type="button" class="choice-btn" onclick="setChoice('topicHelp',this)">Agile Principles and Mindset</button>
+            <button type="button" class="choice-btn" onclick="setChoice('topicHelp',this)">Introduction to Scrum</button>
+            <button type="button" class="choice-btn" onclick="setChoice('topicHelp',this)">Scrum Roles in Depth</button>
+            <button type="button" class="choice-btn" onclick="setChoice('topicHelp',this)">Ceremonies and Artefacts</button>
+            <button type="button" class="choice-btn" onclick="setChoice('topicHelp',this)">Delivery Manager Role</button>
+            <button type="button" class="choice-btn" onclick="setChoice('topicHelp',this)">SM vs Delivery Manager</button>
+            <button type="button" class="choice-btn" onclick="setChoice('topicHelp',this)">Stakeholder Management</button>
+            <button type="button" class="choice-btn" onclick="setChoice('topicHelp',this)">Facilitation and Tooling</button>
+          </div>
+        </div>
+        <hr class="q-divider" />
+        <div class="question">
+          <div class="q-label">How practical and relevant did the sessions feel to real workplace situations? <span class="req">*</span></div>
+          <div class="q-hint">1 = Not practical at all &nbsp; 5 = Highly practical</div>
+          <div class="scale-row" id="practical">
+            <button type="button" class="scale-btn" onclick="setScale('practical',1)">1</button><button type="button" class="scale-btn" onclick="setScale('practical',2)">2</button><button type="button" class="scale-btn" onclick="setScale('practical',3)">3</button><button type="button" class="scale-btn" onclick="setScale('practical',4)">4</button><button type="button" class="scale-btn" onclick="setScale('practical',5)">5</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-heading"><div class="section-icon">🎯</div><div class="section-title">Facilitation</div></div>
+        <div class="question">
+          <div class="q-label">How would you rate the quality of facilitation across Month 1? <span class="req">*</span></div>
+          <div class="q-hint">1 = Poor &nbsp; 5 = Excellent</div>
+          <div class="scale-row" id="facil">
+            <button type="button" class="scale-btn" onclick="setScale('facil',1)">1</button><button type="button" class="scale-btn" onclick="setScale('facil',2)">2</button><button type="button" class="scale-btn" onclick="setScale('facil',3)">3</button><button type="button" class="scale-btn" onclick="setScale('facil',4)">4</button><button type="button" class="scale-btn" onclick="setScale('facil',5)">5</button>
+          </div>
+        </div>
+        <hr class="q-divider" />
+        <div class="question">
+          <div class="q-label">Did you feel comfortable asking questions and contributing during sessions? <span class="req">*</span></div>
+          <div class="q-hint">1 = Not at all &nbsp; 5 = Always</div>
+          <div class="scale-row" id="comfort">
+            <button type="button" class="scale-btn" onclick="setScale('comfort',1)">1</button><button type="button" class="scale-btn" onclick="setScale('comfort',2)">2</button><button type="button" class="scale-btn" onclick="setScale('comfort',3)">3</button><button type="button" class="scale-btn" onclick="setScale('comfort',4)">4</button><button type="button" class="scale-btn" onclick="setScale('comfort',5)">5</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-heading"><div class="section-icon">📝</div><div class="section-title">Assignments</div></div>
+        <div class="question">
+          <div class="q-label">How manageable did you find the assignments alongside your other commitments? <span class="req">*</span></div>
+          <div class="q-hint">1 = Very difficult &nbsp; 5 = Very manageable</div>
+          <div class="scale-row" id="assign">
+            <button type="button" class="scale-btn" onclick="setScale('assign',1)">1</button><button type="button" class="scale-btn" onclick="setScale('assign',2)">2</button><button type="button" class="scale-btn" onclick="setScale('assign',3)">3</button><button type="button" class="scale-btn" onclick="setScale('assign',4)">4</button><button type="button" class="scale-btn" onclick="setScale('assign',5)">5</button>
+          </div>
+        </div>
+        <hr class="q-divider" />
+        <div class="question">
+          <div class="q-label">Did the assignments help reinforce what you learned in the sessions? <span class="req">*</span></div>
+          <div class="q-hint">1 = Not at all &nbsp; 5 = Very much so</div>
+          <div class="scale-row" id="reinforce">
+            <button type="button" class="scale-btn" onclick="setScale('reinforce',1)">1</button><button type="button" class="scale-btn" onclick="setScale('reinforce',2)">2</button><button type="button" class="scale-btn" onclick="setScale('reinforce',3)">3</button><button type="button" class="scale-btn" onclick="setScale('reinforce',4)">4</button><button type="button" class="scale-btn" onclick="setScale('reinforce',5)">5</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-heading"><div class="section-icon">💬</div><div class="section-title">Your Thoughts</div></div>
+        <div class="question">
+          <div class="q-label">What has been the highlight of Month 1 for you? <span class="req">*</span></div>
+          <textarea id="highlight" placeholder="Tell us what stood out most..." oninput="updateProgress()"></textarea>
+        </div>
+        <div class="question">
+          <div class="q-label">What is one thing you would change or improve about the programme so far?</div>
+          <textarea id="improve" placeholder="Be honest. This is how we get better..."></textarea>
+        </div>
+        <div class="question">
+          <div class="q-label">Is there anything specific you would like more focus on in Month 2?</div>
+          <textarea id="month2focus" placeholder="Tools, scenarios, interview prep..."></textarea>
+        </div>
+        <div class="question">
+          <div class="q-label">Any other comments or suggestions?</div>
+          <textarea id="other" placeholder="Anything else on your mind..."></textarea>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-heading"><div class="section-icon">🚀</div><div class="section-title">Looking Ahead</div></div>
+        <div class="question">
+          <div class="q-label">How excited are you about Month 2 and the practical sessions? <span class="req">*</span></div>
+          <div class="q-hint">1 = Not excited &nbsp; 5 = Cannot wait</div>
+          <div class="scale-row" id="excited">
+            <button type="button" class="scale-btn" onclick="setScale('excited',1)">1</button><button type="button" class="scale-btn" onclick="setScale('excited',2)">2</button><button type="button" class="scale-btn" onclick="setScale('excited',3)">3</button><button type="button" class="scale-btn" onclick="setScale('excited',4)">4</button><button type="button" class="scale-btn" onclick="setScale('excited',5)">5</button>
+          </div>
+        </div>
+        <hr class="q-divider" />
+        <div class="question">
+          <div class="q-label">How likely are you to recommend this programme to a colleague or friend? <span class="req">*</span></div>
+          <div class="q-hint">0 = Not at all likely &nbsp; 10 = Extremely likely</div>
+          <div class="nps-row" id="nps">
+            <button type="button" class="nps-btn" onclick="setNPS(0)">0</button><button type="button" class="nps-btn" onclick="setNPS(1)">1</button><button type="button" class="nps-btn" onclick="setNPS(2)">2</button><button type="button" class="nps-btn" onclick="setNPS(3)">3</button><button type="button" class="nps-btn" onclick="setNPS(4)">4</button><button type="button" class="nps-btn" onclick="setNPS(5)">5</button><button type="button" class="nps-btn" onclick="setNPS(6)">6</button><button type="button" class="nps-btn" onclick="setNPS(7)">7</button><button type="button" class="nps-btn" onclick="setNPS(8)">8</button><button type="button" class="nps-btn" onclick="setNPS(9)">9</button><button type="button" class="nps-btn" onclick="setNPS(10)">10</button>
+          </div>
+          <div class="nps-labels"><span>Not likely</span><span>Extremely likely</span></div>
+        </div>
+      </div>
+
+      <div class="submit-block" id="submitBlock">
+        <button type="button" class="submit-btn" id="submitBtn" onclick="submitForm()">Submit My Feedback</button>
+        <div class="submit-note">Your response is private and read only by the facilitator.</div>
+      </div>
+
+      <div class="thankyou-block" id="thankYou">
+        <div class="tick-circle">✓</div>
+        <h2>Thank you for your feedback</h2>
+        <p>Every response is read personally and used to make Month 2 even better for you and every cohort after you. We are proud to have you on this journey.</p>
+        <div class="thankyou-brand">Greater Agile &nbsp;/&nbsp; ROCKITECH CIC &nbsp;—&nbsp; Unlocking Potentials, Transforming Lives</div>
+      </div>
+
+    </form>
+  </div>
+
+  <script>
+    // ── PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL HERE AFTER DEPLOYMENT ──
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbymXZZh0SwMkJ-S-5PY1NNa5gtfyXYdOqos4pfRZxWKx7UMCNdlkq2FgxQvAEfBmw5R/exec';
+
+    const state = { stars:0, conf:0, expect:0, practical:0, facil:0, comfort:0, assign:0, reinforce:0, excited:0, nps:-1, topicVal:'', topicHelp:'', roleTarget:'' };
+    const REQUIRED = ['stars','conf','expect','practical','facil','comfort','assign','reinforce','excited','nps','topicVal'];
+    const TOTAL = REQUIRED.length + 3;
+
+    function updateProgress() {
+      let done = 0;
+      REQUIRED.forEach(k => {
+        if (k==='nps'){if(state.nps>=0)done++;}
+        else if(k==='stars'){if(state.stars>0)done++;}
+        else if(k==='topicVal'){if(state.topicVal)done++;}
+        else{if(state[k]>0)done++;}
+      });
+      if((document.getElementById('firstName').value||'').trim())done++;
+      if((document.getElementById('lastName').value||'').trim())done++;
+      if((document.getElementById('highlight').value||'').trim())done++;
+      const pct=Math.round((done/TOTAL)*100);
+      document.getElementById('progressFill').style.width=pct+'%';
+      document.getElementById('progressPct').textContent=pct+'%';
+      document.getElementById('progressLabel').textContent=pct===0?'Not started':pct<50?'Getting started':pct<80?'Good progress':pct<100?'Almost done':'Ready to submit';
+    }
+
+    function setStars(v){
+      state.stars=v;
+      document.querySelectorAll('#overallStar .star-btn').forEach((b,i)=>b.classList.toggle('lit',i<v));
+      updateProgress();
+    }
+    function setScale(id,v){
+      state[id]=v;
+      document.querySelectorAll('#'+id+' .scale-btn').forEach((b,i)=>b.classList.toggle('active',i+1===v));
+      updateProgress();
+    }
+    function setNPS(v){
+      state.nps=v;
+      document.querySelectorAll('#nps .nps-btn').forEach((b,i)=>b.classList.toggle('active',i===v));
+      updateProgress();
+    }
+    function setChoice(id,el){
+      state[id]=el.textContent.trim();
+      document.querySelectorAll('#'+id+' .choice-btn').forEach(b=>b.classList.remove('active'));
+      el.classList.add('active');
+      updateProgress();
+    }
+
+    function validate(){
+      const fn=document.getElementById('firstName').value.trim();
+      const ln=document.getElementById('lastName').value.trim();
+      const em=document.getElementById('email').value.trim();
+      const hl=document.getElementById('highlight').value.trim();
+      if(!fn||!ln){alert('Please enter your first and last name.');return false;}
+      if(!em||!em.includes('@')){alert('Please enter a valid email address.');return false;}
+      if(!hl){alert('Please share the highlight of Month 1 for you.');return false;}
+      if(state.stars===0){alert('Please rate your overall experience.');return false;}
+      for(const k of['conf','expect','practical','facil','comfort','assign','reinforce','excited']){
+        if(state[k]===0){alert('Please complete all rating questions before submitting.');return false;}
+      }
+      if(state.nps<0){alert('Please complete the recommendation score before submitting.');return false;}
+      if(!state.topicVal){alert('Please select the topic you found most valuable.');return false;}
+      return true;
+    }
+
+    async function submitForm(){
+      if(!validate())return;
+      const btn=document.getElementById('submitBtn');
+      btn.disabled=true;
+      btn.innerHTML='<span class="spinner"></span> Submitting...';
+      const payload={
+        timestamp:new Date().toISOString(),
+        firstName:document.getElementById('firstName').value.trim(),
+        lastName:document.getElementById('lastName').value.trim(),
+        email:document.getElementById('email').value.trim(),
+        roleTarget:state.roleTarget,
+        overallRating:state.stars,
+        confidence:state.conf,
+        expectations:state.expect,
+        practicalRelevance:state.practical,
+        facilitationQuality:state.facil,
+        comfortContributing:state.comfort,
+        assignmentManageability:state.assign,
+        assignmentsReinforced:state.reinforce,
+        excitementMonth2:state.excited,
+        npsScore:state.nps,
+        topicMostValuable:state.topicVal,
+        topicNeedsSupport:state.topicHelp,
+        highlight:document.getElementById('highlight').value.trim(),
+        improvement:document.getElementById('improve').value.trim(),
+        month2Focus:document.getElementById('month2focus').value.trim(),
+        otherComments:document.getElementById('other').value.trim()
+      };
+      try{
+        await fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+      }catch(e){}
+      document.getElementById('submitBlock').style.display='none';
+      document.getElementById('thankYou').style.display='block';
+      document.getElementById('progressFill').style.width='100%';
+      document.getElementById('progressPct').textContent='100%';
+      document.getElementById('progressLabel').textContent='Submitted';
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+  </script>
+</body>
+</html>
